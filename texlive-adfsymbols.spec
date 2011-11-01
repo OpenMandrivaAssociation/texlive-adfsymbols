@@ -23,25 +23,23 @@ TeX/LaTeX support is licensed under LPPL. (See README,
 manifest.txt.).
 
 %pre
+    %_texmf_updmap_pre
     %_texmf_mktexlsr_pre
 
 %post
-sed -i	-e 's/^#! \(Map ArrowsADF.map\)/\1/'	\
-	-e 's/^#! \(Map BulletsADF.map\)/\1/'	\
-	%{_texmfdir}/web2c/updmap.cfg
+    %_texmf_updmap_post
     %_texmf_mktexlsr_post
 
 %preun
-    %_texmf_mktexlsr_preun
+    if [ $1 -eq 0 ]; then
+	%_texmf_updmap_pre
+	%_texmf_mktexlsr_pre
+    fi
 
 %postun
     if [ $1 -eq 0 ]; then
-	if [ -f %{_texmfdir}/web2c/updmap.cfg ]; then
-	    sed -i  -e 's/^\(Map ArrowsADF.map\)/#! \1/'	\
-		    -e 's/^\(Map BulletsADF.map\)/#! \1/'	\
-		%{_texmfdir}/web2c/updmap.cfg
-	fi
-	%_texmf_mltexlsr_post
+	%_texmf_updmap_post
+	%_texmf_mktexlsr_post
     fi
 
 #-----------------------------------------------------------------------
@@ -59,6 +57,7 @@ sed -i	-e 's/^#! \(Map ArrowsADF.map\)/\1/'	\
 %{_texmfdistdir}/tex/latex/adfsymbols/adfbullets.sty
 %{_texmfdistdir}/tex/latex/adfsymbols/uarrowsadf.fd
 %{_texmfdistdir}/tex/latex/adfsymbols/ubulletsadf.fd
+%_texmf_updmap_d/adfsymbols
 %doc %{_texmfdistdir}/doc/fonts/adfsymbols/COPYING
 %doc %{_texmfdistdir}/doc/fonts/adfsymbols/NOTICE
 %doc %{_texmfdistdir}/doc/fonts/adfsymbols/README
@@ -75,3 +74,8 @@ sed -i	-e 's/^#! \(Map ArrowsADF.map\)/\1/'	\
 %install
 mkdir -p %{buildroot}%{_texmfdistdir}
 cp -fpar fonts tex doc %{buildroot}%{_texmfdistdir}
+mkdir -p %{buildroot}%{_texmf_updmap_d}
+cat > %{buildroot}%{_texmf_updmap_d}/adfsymbols <<EOF
+Map ArrowsADF.map
+Map BulletsADF.map
+EOF
