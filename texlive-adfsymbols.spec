@@ -1,3 +1,9 @@
+# revision 19766
+# category Package
+# catalog-ctan /fonts/adfsymbols
+# catalog-date 2010-09-13 13:22:42 +0200
+# catalog-license lppl
+# catalog-version 1.001
 Name:		texlive-adfsymbols
 Version:	1.001
 Release:	1
@@ -64,6 +70,7 @@ manifest.txt.).
 %doc %{_texmfdistdir}/doc/fonts/adfsymbols/adfsymbols.pdf
 %doc %{_texmfdistdir}/doc/fonts/adfsymbols/adfsymbols.tex
 %doc %{_texmfdistdir}/doc/fonts/adfsymbols/manifest.txt
+%doc %{_tlpkgobjdir}/*.tlpobj
 
 #-----------------------------------------------------------------------
 %prep
@@ -74,6 +81,8 @@ manifest.txt.).
 %install
 mkdir -p %{buildroot}%{_texmfdistdir}
 cp -fpar fonts tex doc %{buildroot}%{_texmfdistdir}
+mkdir -p %{buildroot}%{_tlpkgobjdir}
+cp -fpa tlpkg/tlpobj/*.tlpobj %{buildroot}%{_tlpkgobjdir}
 mkdir -p %{buildroot}%{_texmf_updmap_d}
 cat > %{buildroot}%{_texmf_updmap_d}/adfsymbols <<EOF
 Map ArrowsADF.map
