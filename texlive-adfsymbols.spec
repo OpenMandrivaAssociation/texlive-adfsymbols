@@ -15,7 +15,8 @@ Source0:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/adfsymbols.tar.xz
 Source1:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/adfsymbols.doc.tar.xz
 BuildArch:	noarch
 BuildRequires:	texlive-tlpkg
-Requires(post):	texlive-tlpkg
+Requires(pre):	texlive-tlpkg
+Requires(post):	texlive-kpathsea
 Conflicts:	texlive-texmf <= 20110705-3
 Conflicts:	texlive-doc <= 20110705-3
 Requires(post):	texlive-tetex
@@ -33,8 +34,8 @@ manifest.txt.).
     %_texmf_mktexlsr_pre
 
 %post
-    %_texmf_updmap_post
     %_texmf_mktexlsr_post
+    %_texmf_updmap_post
 
 %preun
     if [ $1 -eq 0 ]; then
@@ -44,8 +45,8 @@ manifest.txt.).
 
 %postun
     if [ $1 -eq 0 ]; then
-	%_texmf_updmap_post
 	%_texmf_mktexlsr_post
+	%_texmf_updmap_post
     fi
 
 #-----------------------------------------------------------------------
