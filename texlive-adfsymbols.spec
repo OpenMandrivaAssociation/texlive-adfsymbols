@@ -17,8 +17,6 @@ BuildArch:	noarch
 BuildRequires:	texlive-tlpkg
 Requires(pre):	texlive-tlpkg
 Requires(post):	texlive-kpathsea
-Conflicts:	texlive-texmf <= 20110705-3
-Conflicts:	texlive-doc <= 20110705-3
 Requires(post):	texlive-tetex
 
 %description
@@ -29,24 +27,12 @@ later with font exception. (See NOTICE, COPYING, README.) The
 TeX/LaTeX support is licensed under LPPL. (See README,
 manifest.txt.).
 
-%pre
-    %_texmf_updmap_pre
-    %_texmf_mktexlsr_pre
-
 %post
-    %_texmf_mktexlsr_post
-    %_texmf_updmap_post
-
-%preun
-    if [ $1 -eq 0 ]; then
-	%_texmf_updmap_pre
-	%_texmf_mktexlsr_pre
-    fi
+    %{_sbindir}/texlive.post
 
 %postun
     if [ $1 -eq 0 ]; then
-	%_texmf_mktexlsr_post
-	%_texmf_updmap_post
+	%{_sbindir}/texlive.post
     fi
 
 #-----------------------------------------------------------------------
@@ -71,7 +57,6 @@ manifest.txt.).
 %doc %{_texmfdistdir}/doc/fonts/adfsymbols/adfsymbols.pdf
 %doc %{_texmfdistdir}/doc/fonts/adfsymbols/adfsymbols.tex
 %doc %{_texmfdistdir}/doc/fonts/adfsymbols/manifest.txt
-%doc %{_tlpkgobjdir}/*.tlpobj
 
 #-----------------------------------------------------------------------
 %prep
@@ -82,8 +67,6 @@ manifest.txt.).
 %install
 mkdir -p %{buildroot}%{_texmfdistdir}
 cp -fpar fonts tex doc %{buildroot}%{_texmfdistdir}
-mkdir -p %{buildroot}%{_tlpkgobjdir}
-cp -fpa tlpkg/tlpobj/*.tlpobj %{buildroot}%{_tlpkgobjdir}
 mkdir -p %{buildroot}%{_texmf_updmap_d}
 cat > %{buildroot}%{_texmf_updmap_d}/adfsymbols <<EOF
 Map ArrowsADF.map
