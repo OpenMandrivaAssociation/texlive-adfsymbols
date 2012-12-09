@@ -72,3 +72,18 @@ cat > %{buildroot}%{_texmf_updmap_d}/adfsymbols <<EOF
 Map ArrowsADF.map
 Map BulletsADF.map
 EOF
+
+
+%changelog
+* Tue Jan 03 2012 Paulo Andrade <pcpa@mandriva.com.br> 1.001-2
++ Revision: 749086
+- Rebuild to reduce used resources
+
+* Sat Nov 05 2011 Paulo Andrade <pcpa@mandriva.com.br> 1.001-1
++ Revision: 717794
+- texlive-adfsymbols
+- texlive-adfsymbols
+- texlive-adfsymbols
+- texlive-adfsymbols
+- texlive-adfsymbols
+
