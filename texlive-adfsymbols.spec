@@ -6,7 +6,7 @@
 # catalog-version 1.001
 Name:		texlive-adfsymbols
 Version:	1.001
-Release:	3
+Release:	4
 Summary:	SymbolsADF with TeX/LaTeX support
 Group:		Publishing
 URL:		http://www.ctan.org/tex-archive/fonts/adfsymbols
