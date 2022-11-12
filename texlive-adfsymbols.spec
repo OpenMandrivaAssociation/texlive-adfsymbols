@@ -1,18 +1,12 @@
-# revision 19766
-# category Package
-# catalog-ctan /fonts/adfsymbols
-# catalog-date 2010-09-13 13:22:42 +0200
-# catalog-license lppl
-# catalog-version 1.001
 Name:		texlive-adfsymbols
-Version:	1.001
-Release:	11
+Version:	54512
+Release:	1
 Summary:	SymbolsADF with TeX/LaTeX support
 Group:		Publishing
 URL:		http://www.ctan.org/tex-archive/fonts/adfsymbols
 License:	LPPL
-Source0:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/adfsymbols.tar.xz
-Source1:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/adfsymbols.doc.tar.xz
+Source0:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/adfsymbols.r54512.tar.xz
+Source1:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/adfsymbols.doc.r54512.tar.xz
 BuildArch:	noarch
 BuildRequires:	texlive-tlpkg
 Requires(pre):	texlive-tlpkg
@@ -28,12 +22,12 @@ TeX/LaTeX support is licensed under LPPL. (See README,
 manifest.txt.).
 
 %post
-    %{_sbindir}/texlive.post
+%{_sbindir}/texlive.post
 
 %postun
-    if [ $1 -eq 0 ]; then
+if [ $1 -eq 0 ]; then
 	%{_sbindir}/texlive.post
-    fi
+fi
 
 #-----------------------------------------------------------------------
 %files
@@ -60,7 +54,7 @@ manifest.txt.).
 
 #-----------------------------------------------------------------------
 %prep
-%setup -c -a0 -a1
+%autosetup -p1 -c -a1
 
 %build
 
@@ -72,18 +66,3 @@ cat > %{buildroot}%{_texmf_updmap_d}/adfsymbols <<EOF
 Map ArrowsADF.map
 Map BulletsADF.map
 EOF
-
-
-%changelog
-* Tue Jan 03 2012 Paulo Andrade <pcpa@mandriva.com.br> 1.001-2
-+ Revision: 749086
-- Rebuild to reduce used resources
-
-* Sat Nov 05 2011 Paulo Andrade <pcpa@mandriva.com.br> 1.001-1
-+ Revision: 717794
-- texlive-adfsymbols
-- texlive-adfsymbols
-- texlive-adfsymbols
-- texlive-adfsymbols
-- texlive-adfsymbols
-
